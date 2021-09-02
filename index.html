@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Document</title>
+<style>
+    
+    #template{
+        display: none;
+        background:linear-gradient(120deg,rgb(186, 194, 223)60%,rgba(56, 56, 179, 0.192));
+          height:100vh; width:100%;
+          
+    }
+    @media(max-width:400px){
+        html{
+            font-size:70%;
+        }
+    }
+    
+</style>
+</head>
+
+<body>
+    
+
+
+<div class='container' id='cv-form'>
+<form id='f1' autocomplete="on" enctype="application/x-www-form-urlencoded" method="GET" target="_self">
+    <h1 class='text-center fw-bold my-2 border border-1'>Resume generator</h1>
+    <div class='row'>
+        <div class='col-6 p-2' id='personal_info'>
+           <h1 class='text-center'>Personal info</h1>
+            <div class='mt-2'>
+                <label class='form-label'>Name</label>
+                <input type='text' placeholder="enter name" id='nm' class='form-control' required>
+            </div>
+            <div  class='mt-2'>
+                <label class='form-label'>Contact</label>
+                <input   type='tel' pattern="[0-9]{10}" placeholder="enter number"  id='cn' class='form-control' required>
+            </div>
+            <div  class='mt-2'>
+                <label class='form-label'>Address</label>
+                <textarea  rows="3" placeholder="enter address"  id='ads' class='form-control'required></textarea>
+            </div>
+            <div class='mt-2'>
+                <label class='form-label'>select profile photo</label>
+                <input type='file' id='pic_file' class='form-control' accept="image/*">
+            </div>
+            <p>Important Links</p>
+            <div  class='mt-2'>
+                <label class='form-label'>Facebook</label>
+                <input type='text' placeholder="link" id='fb' class='form-control'>
+            </div>
+            <div  class='mt-2'>
+                <label class='form-label'>Insta</label>
+                <input type='text' placeholder="link" id='insta' class='form-control'>
+            </div>
+            <div  class='mt-2'>
+                <label class='form-label'>LinkedIn</label>
+                <input type='text' placeholder="link" id='linked' class='form-control'>
+            </div>
+        </div>
+        <div class='col-6 p-2'>
+            <h1 class='text-center'>Professional Info</h1>
+            <div class='mt-2'>
+                <label class='form-label'>Objective</label>
+                <textarea class='form-control' id='obj' placeholder="enter here" ></textarea>
+               
+            </div>
+            <div class='mt-2' id='div1'>
+                <label class='form-label'>Work experience</label>
+                <textarea class='form-control exp' placeholder="enter here" ></textarea>
+                <div  class='mt-2 text-center' id='ex_btn'>
+                    <a  class='btn btn-primary btn-sm' onclick='add()'>Add</a>
+                </div>
+            </div>
+            <div class='mt-2' id='div2'>
+                <label class='form-label'>Acadmic qualification</label>
+                <textarea  class='form-control quali' placeholder="enter here" required></textarea>
+                <div  class='mt-2 text-center' id='quali_btn'>
+                    <a class='btn btn-primary btn-sm' onclick='addd()'>Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='text-center my-5' >
+        <button class='btn btn-outline-primary' type='submit'>Genearte</button>
+        <div id='msg' class='text-danger'></div>
+    </div>
+    </form>
+</div>
+<!----template-->
+<div class='container '  id='template'>
+ <div class='d-flex justify-content-center align-items-center w-100' style='height:100vh;'>   
+    <div class='row'>
+        <div class='col-md-4 col-5 shadow p-2' id='colorful'>
+            <div class='mt-2 text-center p-1'>
+                <img src='image/night.jpg'  class='  rounded-circle img-fluid' id='pic'>
+            </div>
+            <div class='mt-2 border border-1 shadow'>
+              <dl class='row p-2 gy-2'>
+                <dt class='col-md-6 col-4'>Name</dt>
+                <dt class='col-md-6 col-8 text-center' id='lblnm'></dt>
+                <dt class='col-md-6 col-4'>contact</dt>
+                <dt class='col-md-6 col-8 text-center' id='lblcn'></dt>
+                <dt class='col-md-6 col-4'>Address</dt>
+                <dt class='col-md-6 col-8 text-center' id='lbladrs'></dt>
+                <dt class='col-md-6 col-4'>facebook</dt>
+                <dt class='col-md-6 col-8 text-center' id='lblfb'></dt>
+                <dt class='col-md-6 col-4'>insta</dt>
+                <dt class='col-md-6 col-8 text-center' id='lblinsta'></dt>
+                <dt class='col-md-6 col-4'>LinkedIn</dt>
+                <dt class='col-md-6 col-8 text-center' id='lbllinked'></dt>
+              </dl>
+            </div>
+        </div>
+        <div class='col-md-8 col-7'>
+<h1 id='head_nm' class='text-center'></h1>
+
+<div class='row p-2 gy-2' >
+  <div class='col-12 p-2 shadow'>
+    <div class='card'>
+      <div class='card-header text-center'>
+          Objective
+      </div>
+      <div class='card-body' id='lblobj'>
+
+      </div>
+  </div>
+  </div>
+    <!---experience-->
+    <div class='col-12 p-2 shadow' >
+   <div class='card'>
+       <div class='card-header text-center'>
+           Experience
+       </div>
+       <div class='card-body'>
+           <ul id='ull'>
+             <li>no experience</li>
+          </ul>
+       </div>
+   </div>
+   
+   </div>
+
+<!--qualification-->
+<div class='col-12 p-2 shadow'>
+    <div class='card'>
+        <div class='card-header text-center'>
+            Qualification
+        </div>
+        <div class='card-body'>
+            <ul id='ulll'>
+              <li>anpadh</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class='text-center col-12 mt-2'>
+    <button class='btn btn-success' onclick='priint("template")'>print</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<script type='text/javascript' src='resume.js'></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
